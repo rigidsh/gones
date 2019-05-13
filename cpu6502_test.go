@@ -17,8 +17,36 @@ func TestADC_IMM(t *testing.T) {
 	if cpu.registerACC != 50 {
 		t.Error("42 + 8 != 50")
 	}
+}
 
-	fmt.Println(cpu.registerACC)
+func TestADC_overflow_IMM(t *testing.T) {
+
+	//ADC #1
+	ram := []byte{0x69, 0x01}
+	cpu := CreateCPU6502(RAMMemory(ram))
+	cpu.registerPC = 0
+	cpu.registerACC = 0xFF
+	cpu.DoIteration()
+
+	if cpu.registerACC != 0 {
+		t.Error("42 + 8 != 50")
+	}
+
+	if cpu.flagC != 1 {
+		t.Error("flag C incorrect")
+	}
+
+	if cpu.flagV != 0 {
+		t.Error("flag V incorrect")
+	}
+
+	if cpu.flagN != 0 {
+		t.Error("flag N incorrect")
+	}
+
+	if cpu.flagZ != 0 {
+		t.Error("flag Z incorrect")
+	}
 }
 
 func TestADC_ZP(t *testing.T) {
