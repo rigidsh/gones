@@ -21,10 +21,11 @@ func TestADC_IMM(t *testing.T) {
 }
 
 func TestADC_overflow_IMM(t *testing.T) {
-	ram := asm.DefaultCompiler.Compile([]asm.Instruction{
-		asm.ADC(asm.Value(1)),
-	})
-	cpu := CreateCPU6502(RAMMemory(ram))
+
+	test := asm.NewProgram()
+	test.AddInstruction(asm.ADC(asm.Value(1)))
+
+	cpu := CreateCPU6502(RAMMemory(test.Compile()))
 	cpu.registerPC = 0
 	cpu.registerACC = 0xFF
 	cpu.DoIteration()
