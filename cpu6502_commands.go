@@ -24,7 +24,6 @@ func (cpu *CPU6502) andCommand(address uint16) {
 }
 
 func (cpu *CPU6502) aslCommand(address uint16) {
-	//TODO:
 	cpu.memory.write(address, cpu.memory.read(address)<<2)
 }
 

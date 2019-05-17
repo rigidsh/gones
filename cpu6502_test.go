@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/rigidsh/gones/asm"
 	"testing"
 )
 
@@ -20,9 +21,9 @@ func TestADC_IMM(t *testing.T) {
 }
 
 func TestADC_overflow_IMM(t *testing.T) {
-
-	//ADC #1
-	ram := []byte{0x69, 0x01}
+	ram := asm.DefaultCompiler.Compile([]asm.Instruction{
+		asm.ADC(asm.Value(1)),
+	})
 	cpu := CreateCPU6502(RAMMemory(ram))
 	cpu.registerPC = 0
 	cpu.registerACC = 0xFF

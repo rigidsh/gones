@@ -158,7 +158,6 @@ func (cpu *CPU6502) pushStack16(data uint16) {
 func (cpu *CPU6502) buildInstruction(command command, addressing addressing, cycles uint16) instruction {
 	return func() {
 		argument, _ := addressing()
-		//mcu.registerPC += extraCycles + cycles
 		command(argument)
 	}
 }
