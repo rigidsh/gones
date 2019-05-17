@@ -20,6 +20,7 @@ type CPU6502 struct {
 }
 
 func CreateCPU6502(memory Memory) *CPU6502 {
+
 	cpu := &CPU6502{
 		memory: memory,
 	}

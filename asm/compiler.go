@@ -9,9 +9,9 @@ var DefaultCompiler = &Compiler{}
 type Compiler struct {
 }
 
-func (compiler *Compiler) Compile(program []Instruction) []byte {
+func (compiler *Compiler) Compile(program Program) []byte {
 	var buf bytes.Buffer
-	for _, ins := range program {
+	for _, ins := range program.instructions {
 		ins.write(&buf)
 	}
 

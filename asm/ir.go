@@ -5,6 +5,20 @@ import (
 	"io"
 )
 
+func NewProgram() *Program {
+	return &Program{
+		instructions: make([]Instruction, 0),
+	}
+}
+
+type Program struct {
+	instructions []Instruction
+}
+
+func (program Program) AddInstruction(instruction Instruction) {
+	program.instructions = append(program.instructions, instruction)
+}
+
 type Instruction interface {
 	write(writer io.Writer)
 }
